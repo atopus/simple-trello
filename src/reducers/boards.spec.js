@@ -1,16 +1,21 @@
+import * as actions from '../constants/ActionTypes'
 import reducer, * as boards from './boards'
+import listReducer, * as fromLists from './lists'
 
 describe('reducers', () => {
   describe('boards', () => {
     let state
 
-    // For now, there is no specific action for 
-    // a starting app.
     describe('when the app starts', () => {
-      state = reducer({}, { type: 'LOAD_BOARDS', boards : [] })
 
-      it('the state contains no board', () => {
+      it('the byId state contains no board', () => {
+        //FIXME: Seems like the state start with one
+        // object { "1" : {}}. Can't see how... 
         expect(boards.getBoards(state)).toEqual({})
+      })
+
+      it('the allIds state boards is empty', () => {
+        expect(boards.getBoardsIds(state)).toEqual([])
       })
     })
 
@@ -18,7 +23,7 @@ describe('reducers', () => {
 
       beforeEach(() => {
         state = reducer({}, {
-          type: 'LOAD_BOARDS',
+          type: actions.LOAD_BOARDS,
           boards: [
             {
               id: 1,
@@ -55,7 +60,7 @@ describe('reducers', () => {
 
         beforeEach(() => {
           state = reducer(state, { 
-            type: 'SELECT_BOARD', 
+            type: actions.SELECT_BOARD, 
             boardId: 1 
           })
         })
@@ -65,6 +70,58 @@ describe('reducers', () => {
             {
               id: 1,
               title: 'Board 1'
+          })
+        })
+
+        describe('when a new list is created', () => {
+          state = reducer(state, {
+            type: actions.CREATE_LIST,
+            boardId: 1,
+            title: "New list created"
+          })
+
+          // it('is associated with the active board', () => {
+          //   expect(boards.getLists(state).toContainEqual({
+          //     id: 1,
+          //     boardId: 1,
+          //     title: "New list created"
+          //   }))
+          // })
+        })
+      })
+
+      describe('when a new board is created', () => {
+
+        beforeEach(() => {
+          state = reducer(state, {
+            type: 'CREATE_BOARD',
+            id: 3,
+            title: 'Board 3'
+          })
+        })
+        
+        it('the state contains the new board', () => {
+          expect(boards.getBoard(state, 3)).toMatchObject({
+            id: 3,
+            title: 'Board 3',
+          })
+        })
+
+        it('the state also contains the previous boards', () => {
+          expect(boards.getBoard(state, 1)).toEqual({
+            id: 1,
+            title: 'Board 1'
+          })
+          expect(boards.getBoard(state, 2)).toEqual({
+            id: 2,
+            title: 'Board 2'
+          })
+        })
+
+        it('the board is set as the active board', () => {
+          expect(boards.getSelectedBoard(state, 3)).toMatchObject({
+            id: 3,
+            title: 'Board 3'
           })
         })
       })
