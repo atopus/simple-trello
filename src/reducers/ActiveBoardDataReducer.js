@@ -10,8 +10,6 @@ import {
 } from '../actions/ActionTypes';
 import uniqueId from 'lodash/uniqueId';
 
-// Ne devrait-il pas créer une initialisation avec listItems ?
-// par défaut ?
 const ListReducer = (state = {}, action) => {
 
     const listId = uniqueId("list_");
@@ -45,7 +43,7 @@ const ListReducer = (state = {}, action) => {
             const { cardId, cardName, listId, newListId } = action.payload;
             const currentList = state[newListId]; // list that's going to be taking the new card
             currentList.cards.push({ name: cardName, cardId, listId: newListId }) // add the card to the list
-            const removeCard = state[listId].cards.find(card => card.cardId === cardId); // find the card to remove
+            const removeCard = state[listId].cards.findIndex(card => card.cardId === cardId); // find the card to remove
             const oldList = state[listId].cards.splice(removeCard, 1) // remove the card from the list
 
                 return {
