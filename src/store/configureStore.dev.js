@@ -1,16 +1,21 @@
+import throttle from 'lodash/throttle';
+
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
-import api from '../middleware/api'
+// import api from '../middleware/api'
 import rootReducer from '../reducers'
 import DevTools from '../containers/DevTools'
+
+import { saveState, loadState } from '../utils/SyncBoardCollectionLocalStorage'
+const persistedState = loadState();
 
 const configureStore = preloadedState => {
   const store = createStore(
     rootReducer,
-    preloadedState,
+    persistedState,
     compose(
-      applyMiddleware(thunk, api, createLogger()),
+      applyMiddleware(thunk),//, api, createLogger()),
       DevTools.instrument()
     )
   )
@@ -21,6 +26,14 @@ const configureStore = preloadedState => {
       store.replaceReducer(rootReducer)
     })
   }
+
+  store.subscribe(throttle(() => {
+    saveState({
+        boards: store.getState().boards,
+        lists : store.getState().lists,
+        cards : store.getState().cards
+    })
+}, 1000));
 
   return store
 }

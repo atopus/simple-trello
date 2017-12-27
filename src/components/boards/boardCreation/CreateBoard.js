@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
-import createNewBoard from './../../../Actions/CreateNewBoard';
+import createNewBoard from './../../../actions/CreateNewBoard';
 
 export const Wrapper = styled.div`
     width: 345px;

@@ -34,7 +34,7 @@ class ListItemsContainer extends Component {
     }
 }
 
-function mapStateToProps({ activeBoardData }) {
+const mapStateToProps({ activeBoardData }) {
     return { activeBoardData }
 }
 

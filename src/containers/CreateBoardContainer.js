@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import CreateBoard from './CreateBoard';
+import CreateBoard from './components/CreateBoard';
 import ActiveCreateBoard from './ActiveCreateBoard';
 
 
@@ -22,7 +22,7 @@ CreateBoardContainer.PropTypes = {
     newBoard: PropTypes.object
 }
 
-function mapStateToProps({ newBoard }) {
+const mapStateToProps({ newBoard }) {
     return {
         newBoard
     }

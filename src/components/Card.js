@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { DragSource } from 'react-dnd';
 import { ItemTypes } from '~utils/Constants';
 import { fadeIn } from '~utils/Animations';
-import archiveCard from '~Actions/ArchiveCard';
+import archiveCard from '~actions/ArchiveCard';
 
 const CardWrapper = styled.div`
     margin: 10px 0;

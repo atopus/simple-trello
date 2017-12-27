@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import BoardContainer from './boards/BoardContainer';
+import BoardContainer from './BoardContainer';
 import ShowActiveBoard from './boards/activeBoard/ShowActiveBoard';
 import NotFound from './NotFound';
 import Header from './Header';

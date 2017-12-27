@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Field, reduxForm, reset } from 'redux-form';
 import { connect } from 'react-redux';
-import submitNewCard from '~Actions/SubmitNewCard';
+import submitNewCard from '~actions/SubmitNewCard';
 import BoardTitleInput from './../../boardCreation/BoardTitleInput';
-import Card from './Card';
+import Card from '../components/Card';
 import uniqueId from 'lodash/uniqueId';
 
-import { getActiveBoard } from '~Reducers/BoardsCollection';
+import { getActiveBoard } from '~reducers/boards';
 
 class CreateCardContainer extends Component {
 
@@ -69,7 +69,7 @@ const afterSubmit = (result, dispatch) => {
     dispatch(reset('cardName'));
 }
 
-function mapStateToProps({ activeBoardData }) {
+const mapStateToProps({ activeBoardData }) {
     return { activeBoardData }
 }
 

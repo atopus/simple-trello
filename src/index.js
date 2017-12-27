@@ -4,9 +4,11 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 import App from './components/App'
-import Store from './Store'
+import { composeWithDevTools } from 'redux-devtools-extension'
+// import Store from './Store'
 import configureStore from './store/configureStore'
 import registerServiceWorker from './registerServiceWorker'
+
 import './index.css'
 
 const store = configureStore()

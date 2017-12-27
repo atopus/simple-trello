@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux'
 import { Wrapper } from './CreateBoard';
-import cancelCreatingBoard from './../../../Actions/CancelCreatingBoard';
-import submitNewBoard from './../../../Actions/SubmitNewBoard';
+import cancelCreatingBoard from './../../../actions/CancelCreatingBoard';
+import submitNewBoard from './../../../actions/SubmitNewBoard';
 import BoardTitleForm from './BoardTitleForm';
 
 const Title = styled.h3`
@@ -67,7 +67,7 @@ class ActiveCreateBoard extends Component {
                     <Title>Creating a board</Title>
                     <CloseBoardIcon
                         onClick={() => cancelCreatingBoard()}
-                        src={require('../../../Assets/closeIcon.svg')}
+                        src={require('../../../assets/closeIcon.svg')}
                     />
                 </TopWrapper>
 
