@@ -1,80 +1,98 @@
-import React, { Component } from 'react';
-import { Field, reduxForm, reset } from 'redux-form';
-import { connect } from 'react-redux';
-import submitNewCard from '~actions/SubmitNewCard';
-import BoardTitleInput from './../../boardCreation/BoardTitleInput';
-import Card from '../components/Card';
-import uniqueId from 'lodash/uniqueId';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { Field, reduxForm, reset } from 'redux-form'
+import submitNewCard from '~actions/SubmitNewCard'
+import BoardTitleInput from './../../boardCreation/BoardTitleInput'
+import Card from '../components/Card'
+import uniqueId from 'lodash/uniqueId'
 
 import { getActiveBoard } from '~reducers/boards';
 
-class CreateCardContainer extends Component {
+const CardContainer = ({ title }) => (
+    <Card title={title} />
+)
 
-    submit = values => {
-        const { listId, submitNewCard } = this.props;
-        let cardName = `cardName_${listId}`;
-        submitNewCard(values[cardName], uniqueId('cardItem_'), listId);
-    }
-
-    renderCards = () => {
-
-
-        const { activeBoardData, listId } = this.props;
-
-        // const activeBoard = getActiveBoard();
-
-        return activeBoardData.listItems[listId].cards.map((card, i) => {
-            return (
-                <Card
-                    key={i}
-                    title={card.name}
-                    cardId={card.cardId}
-                    listId={card.listId}
-                    isArchived={card.isArchived}
-                />
-            )
-        })
-    }
-
-    render() {
-        const { handleSubmit, listId } = this.props;
-        return (
-            <div>
-                <form onSubmit={handleSubmit(this.submit)}>
-                    <label>
-                        <Field
-                            type="text"
-                            component={BoardTitleInput}
-                            name={`cardName_${listId}`}
-                        />
-                    </label>
-                </form>
-                {this.renderCards()}
-            </div>
-        )
-    }
+CardContainer.propTypes = {
+    title : PropTypes.string.isRequired
 }
 
-function validate(values) {
-    const errors = {};
+const mapStateToProps = state => ({
+    title: state.title
+})
 
-    if (!values.cardName) {
-        errors.cardName = 'oops!';
-    }
+export default connect(
+    mapStateToProps,
+    {}
+)(CardContainer)
 
-    return errors;
-}
+// class CreateCardContainer extends Component {
 
-const afterSubmit = (result, dispatch) => {
-    dispatch(reset('cardName'));
-}
+//     submit = values => {
+//         const { listId, submitNewCard } = this.props;
+//         let cardName = `cardName_${listId}`;
+//         submitNewCard(values[cardName], uniqueId('cardItem_'), listId);
+//     }
 
-const mapStateToProps({ activeBoardData }) {
-    return { activeBoardData }
-}
+//     renderCards = () => {
 
-export default reduxForm({
-    validate,
-    form: 'cardName',
-    onSubmitSuccess: afterSubmit,
-})(connect(mapStateToProps, { submitNewCard })(CreateCardContainer));
+
+//         const { activeBoardData, listId } = this.props;
+
+//         // const activeBoard = getActiveBoard();
+
+//         return activeBoardData.listItems[listId].cards.map((card, i) => {
+//             return (
+//                 <Card
+//                     key={i}
+//                     title={card.name}
+//                     cardId={card.cardId}
+//                     listId={card.listId}
+//                     isArchived={card.isArchived}
+//                 />
+//             )
+//         })
+//     }
+
+//     render() {
+//         const { handleSubmit, listId } = this.props;
+//         return (
+//             <div>
+//                 <form onSubmit={handleSubmit(this.submit)}>
+//                     <label>
+//                         <Field
+//                             type="text"
+//                             component={BoardTitleInput}
+//                             name={`cardName_${listId}`}
+//                         />
+//                     </label>
+//                 </form>
+//                 {this.renderCards()}
+//             </div>
+//         )
+//     }
+// }
+
+// function validate(values) {
+//     const errors = {};
+
+//     if (!values.cardName) {
+//         errors.cardName = 'oops!';
+//     }
+
+//     return errors;
+// }
+
+// const afterSubmit = (result, dispatch) => {
+//     dispatch(reset('cardName'));
+// }
+
+// const mapStateToProps({ activeBoardData }) {
+//     return { activeBoardData }
+// }
+
+// export default reduxForm({
+//     validate,
+//     form: 'cardName',
+//     onSubmitSuccess: afterSubmit,
+// })(connect(mapStateToProps, { submitNewCard })(CreateCardContainer));

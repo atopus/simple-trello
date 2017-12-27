@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import CreateBoardContainer from './CreateBoardContainer'
 import ShowAllBoards from './ShowAllBoards'
@@ -7,9 +8,9 @@ import { fadeIn } from '~utils/Animations'
 
 import Board from '../components/Board'
 import ListItem from '../components/ListItem'
-import createList from '../actions'
+import { createList, getLists } from '../actions'
 
-const BoardContainer = ({ title, lists }) => {
+const BoardContainer = ({ title, lists }) => (
   <Board title={title}>
     {lists.map(list =>
       <ListItem

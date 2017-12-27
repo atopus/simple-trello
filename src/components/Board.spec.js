@@ -1,9 +1,9 @@
 import React from 'react'
-import { shallow, } from 'enzyme'
-import Board from './Board'
-
+import { shallow } from 'enzyme'
 import Enzyme from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
+import Board from './Board'
+
 Enzyme.configure({ adapter: new Adapter() })
 
 const setup = props => {
@@ -21,7 +21,7 @@ const setup = props => {
 }
 
 describe('Board component', () => {
-  it('should render title and price', () => {
+  it('should render the Board', () => {
     const { component } = setup({ title: 'Test Board' })
     expect(component.text()).toBe('Test Board')
   })

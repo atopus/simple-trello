@@ -1,104 +1,116 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+// import { connect } from 'react-redux'
 import { DragSource } from 'react-dnd';
-import { ItemTypes } from '~utils/Constants';
-import { fadeIn } from '~utils/Animations';
-import archiveCard from '~actions/ArchiveCard';
+import { ItemTypes } from '../utils/Constants';
+import { fadeIn } from '../utils/Animations';
+import archiveCard from '../actions/ArchiveCard';
 
-const CardWrapper = styled.div`
-    margin: 10px 0;
-    padding: 14px 7px;
-    background: rgb(241, 241, 241);
-    border-radius: 4.5px;
-    cursor: grab;
-    animation: ${fadeIn} 300ms linear;
-    display: flex;
-    justify-content: space-around;
+const Card = ({ title }) => (
+	<h4>{title}</h4>
+)
 
-`
-
-const CardTitle = styled.h3`
-    font-weight: bold;
-    font-size: 19px;
-    margin: 0;
-`
-
-const ArchiveTask = styled.div`
-    padding: 4px 7px;
-    opacity: 0.4;
-    border: none;
-    border-radius: 9999;
-    cursor: pointer;
-    font-size: 16px;
-`
-
-const cardSource = {
-    beginDrag({ title, cardId, listId }) {
-        return {
-            title, cardId, listId
-        }
-    }
+Card.propTypes = {
+	title: PropTypes.string.isRequired
 }
 
+export default Card
 
-function collect(connect, monitor) {
-	return {
-		connectDragSource: connect.dragSource(),
-		connectDragPreview: connect.dragPreview(),
-		isDragging: monitor.isDragging(),
-	}
-}
+// const CardWrapper = styled.div`
+//     margin: 10px 0;
+//     padding: 14px 7px;
+//     background: rgb(241, 241, 241);
+//     border-radius: 4.5px;
+//     cursor: grab;
+//     animation: ${fadeIn} 300ms linear;
+//     display: flex;
+//     justify-content: space-around;
 
-@DragSource(ItemTypes.CARD, cardSource, collect)
-class Card extends Component {
+// `
 
-	static propTypes = {
-		connectDragSource: PropTypes.func.isRequired,
-		connectDragPreview: PropTypes.func.isRequired,
-		isDragging: PropTypes.bool.isRequired,
-    }
+// const CardTitle = styled.h3`
+//     font-weight: bold;
+//     font-size: 19px;
+//     margin: 0;
+// `
 
-    togglePost = (cardId, listId) => {
-        this.props.archiveCard(cardId, listId)
-    }
+// const ArchiveTask = styled.div`
+//     padding: 4px 7px;
+//     opacity: 0.4;
+//     border: none;
+//     border-radius: 9999;
+//     cursor: pointer;
+//     font-size: 16px;
+// `
 
-    render() {
 
-        const {
-            isDragging,
-            connectDragSource,
-            title,
-            archiveCard,
-            cardId,
-            listId,
-            isArchived,
-        } = this.props;
 
-        const cardStyles = {
-            opacity: isDragging || isArchived ? 0.35 : 1,
-            boxShadow: "0 6px 6px rgba(0,0,0,0.16), 0 6px 6px rgba(0,0,0,0.23)",
-            textDecoration: isArchived ? "line-through" : "none",
-            backgroundColor: isArchived ? "#DECAFF" : "#caffde",
-        };
+// const cardSource = {
+//     beginDrag({ title, cardId, listId }) {
+//         return {
+//             title, cardId, listId
+//         }
+//     }
+// }
 
-        return connectDragSource(
-            <div>
-                <CardWrapper style={cardStyles}>
-                    <CardTitle>{title}</CardTitle>
-                    <ArchiveTask onClick={() => this.togglePost(cardId, listId)}>✓</ArchiveTask>
-                </CardWrapper>
-            </div>
 
-        )
-    }
-}
+// function collect(connect, monitor) {
+// 	return {
+// 		connectDragSource: connect.dragSource(),
+// 		connectDragPreview: connect.dragPreview(),
+// 		isDragging: monitor.isDragging(),
+// 	}
+// }
 
-const mapStateToProps = ({ activeBoardData }) => {
-    return {
-        activeBoardData
-    }
-}
+// @DragSource(ItemTypes.CARD, cardSource, collect)
+// class Card extends Component {
 
-export default connect(mapStateToProps, { archiveCard })(Card);
+// 	static propTypes = {
+// 		connectDragSource: PropTypes.func.isRequired,
+// 		connectDragPreview: PropTypes.func.isRequired,
+// 		isDragging: PropTypes.bool.isRequired,
+//     }
+
+//     togglePost = (cardId, listId) => {
+//         this.props.archiveCard(cardId, listId)
+//     }
+
+//     render() {
+
+//         const {
+//             isDragging,
+//             connectDragSource,
+//             title,
+//             archiveCard,
+//             cardId,
+//             listId,
+//             isArchived,
+//         } = this.props;
+
+//         const cardStyles = {
+//             opacity: isDragging || isArchived ? 0.35 : 1,
+//             boxShadow: "0 6px 6px rgba(0,0,0,0.16), 0 6px 6px rgba(0,0,0,0.23)",
+//             textDecoration: isArchived ? "line-through" : "none",
+//             backgroundColor: isArchived ? "#DECAFF" : "#caffde",
+//         };
+
+//         return connectDragSource(
+//             <div>
+//                 <CardWrapper style={cardStyles}>
+//                     <CardTitle>{title}</CardTitle>
+//                     <ArchiveTask onClick={() => this.togglePost(cardId, listId)}>✓</ArchiveTask>
+//                 </CardWrapper>
+//             </div>
+
+//         )
+//     }
+// }
+
+// const mapStateToProps = ({ activeBoardData }) => {
+//     return {
+//         activeBoardData
+//     }
+// }
+
+// export default connect(mapStateToProps, { archiveCard })(Card);
