@@ -14,7 +14,7 @@ export const loadState = () => {
 
 export const saveState = boards => {
     try {
-        // save activeBoardData into collectionData
+        // saves activeBoardData into collectionData
         boards.boardsCollection.map( board => {
             if(board.id == boards.activeBoard.id) {
                 board.data = boards.activeBoardData.listItems

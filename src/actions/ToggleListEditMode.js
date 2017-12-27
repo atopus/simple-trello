@@ -3,5 +3,8 @@ import {
 } from './ActionTypes';
 
 export default function enableListEditMode() {
-    return dispatch => dispatch({ type: LIST_EDIT_MODE_ENABLED, payload: true });
+    return dispatch => dispatch({ 
+        type: LIST_EDIT_MODE_ENABLED, 
+        payload: true 
+    });
 }

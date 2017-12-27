@@ -1,9 +1,14 @@
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
+// This file is now unused and should be removed as needed.
+
 import throttle from 'lodash/throttle';
-import RootReducer from '~Reducers/RootReducer';
-import { loadState, saveState } from '~Utils/SyncBoardCollectionLocalStorage';
+
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension'
+
+import RootReducer from './reducers/RootReducer'
+
+import { loadState, saveState } from './utils/SyncBoardCollectionLocalStorage'
 
 const middleware = applyMiddleware(thunk);
 const persistedState = loadState();

@@ -92,7 +92,7 @@ module.exports = {
     alias: {
       '~Actions': path.resolve(__dirname, '../src/Actions'),
       '~Reducers': path.resolve(__dirname, '../src/Reducers'),
-      '~Utils': path.resolve(__dirname, '../src/Utils'),
+      '~utils': path.resolve(__dirname, '../src/utils'),
       '~Assets': path.resolve(__dirname, '../src/Assets'),
       '~Components': path.resolve(__dirname, '../src/Components'),
       // Support React Native Web

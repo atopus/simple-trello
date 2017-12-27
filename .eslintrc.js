@@ -31,6 +31,7 @@ module.exports = {
         "react/prop-types": 0,
         "no-console": 0,
         "react/no-find-dom-node": 0,
-        "no-unused-vars": 0
+        "no-unused-vars": 0,
+        "no-case-declarations" : 0
     }
 };

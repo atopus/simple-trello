@@ -4,7 +4,7 @@ import {
     CREATE_NEW_BOARD,
     CANCEL_NEW_BOARD,
     SUBMIT_NEW_BOARD,
-} from '~Actions/ActionTypes';
+} from '../actions/ActionTypes';
 
 const initialState = {
     isBoardOpen: false,
@@ -12,7 +12,6 @@ const initialState = {
     id: null,
     success: false,
 }
-
 
 export default function(state = initialState, action) {
 
@@ -41,11 +40,11 @@ export default function(state = initialState, action) {
                 ...state,
                 isBoardOpen: false,
                 title: action.payload,
-                id: uniqueId(''),
+                id: action.id //uniqueId(''),
             }
 
-            default:
-                return state;
+        default:
+            return state;
 
     }
 

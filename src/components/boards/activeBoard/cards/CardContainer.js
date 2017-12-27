@@ -6,6 +6,8 @@ import BoardTitleInput from './../../boardCreation/BoardTitleInput';
 import Card from './Card';
 import uniqueId from 'lodash/uniqueId';
 
+import { getActiveBoard } from '~Reducers/BoardsCollection';
+
 class CreateCardContainer extends Component {
 
     submit = values => {
@@ -15,7 +17,12 @@ class CreateCardContainer extends Component {
     }
 
     renderCards = () => {
+
+
         const { activeBoardData, listId } = this.props;
+
+        // const activeBoard = getActiveBoard();
+
         return activeBoardData.listItems[listId].cards.map((card, i) => {
             return (
                 <Card
